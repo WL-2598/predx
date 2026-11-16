@@ -24,7 +24,13 @@ jobs:
       - name: 确认运行时零依赖
         run: |
           python -V
-          test ! -s requirements.txt && echo "requirements.txt 为空 —— 运行时无第三方依赖"
+          pkgs=$(grep -vE '^[[:space:]]*(#|$)' requirements.txt || true)
+          if [ -n "$pkgs" ]; then
+            echo "::error::requirements.txt 里出现了真实依赖："
+            echo "$pkgs"
+            exit 1
+          fi
+          echo "requirements.txt 仅含注释 —— 运行时零第三方依赖"
 
       - name: 安装测试工具（仅 pytest，非运行时依赖）
         run: python -m pip install --quiet pytest
@@ -41,6 +47,7 @@ jobs:
       - name: 冒烟测试（真实起服务 + curl）
         run: |
           python run.py --port 8101 &
+          SERVER_PID=$!
           sleep 4
           make smoke PORT=8101
-          kill %1 || true
+          kill "$SERVER_PID" || true
