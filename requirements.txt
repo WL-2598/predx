@@ -1,0 +1,10 @@
+# PredX 刻意零第三方依赖：只用 Python 3.10+ 标准库（http.server / sqlite3 / hashlib / json）。
+# 因此本文件没有可安装的包 —— 保留它只是为了说明「pip install -r requirements.txt」是安全的空操作，
+# 也为了在 CI 里显式声明这一点。
+#
+# 运行环境要求：
+#   Python >= 3.10（使用了 X | Y 类型标注与 match 之外的 3.10 语法）
+#
+# 开发/测试额外需要（同样零依赖）：
+#   python3 -m pytest        # 若环境已提供；否则用 make check-http 做冒烟测试
+

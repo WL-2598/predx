@@ -1,0 +1,30 @@
+# 运行时数据（首次 `python3 run.py` 会自动重建并灌入演示数据）
+data/
+*.db
+*.db-journal
+*.db-wal
+*.sqlite3
+backups/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.python-version
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+
+# 编辑器 / 系统
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# 本地配置
+.env
+.env.*
+!.env.example
